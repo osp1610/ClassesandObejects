@@ -7,7 +7,6 @@
         string name, Class, branch;
         int[] marks = new int[5];
         int avg = 0,sum=0;
-        bool isPass=true;
         public StudentFiveMarks()
         {
 
@@ -17,7 +16,7 @@
             this.rollno = rollno;
             this.sem = sem;
             this.name = name;
-            Class = Class;
+            this.Class = Class;
             this.branch = branch;
             Console.WriteLine("Name of the students:" + name);
             Console.WriteLine("Roll No:" + rollno);
@@ -33,35 +32,33 @@
             for (int i = 0; i < 5; i++)
             {
                 marks[i] = Convert.ToInt32(Console.ReadLine());
-                sum = sum + marks[i];
             }
-            avg = sum / 5;
-            Console.WriteLine(avg);
-
         }
 
 
         public void displayResult()
         {
-         
-
-                foreach (int mark in marks)
-                {
-                    if (mark < 35 && avg<50)
-                    {
-                        isPass = false;
-                        break;
-                    }
-
-                }
-            
-            if (isPass == false)
+            bool isPass = true;
+            foreach (int mark in marks)
             {
-                Console.WriteLine("Your Failed");
+                sum += mark;
+                if (mark < 35)
+                {
+                    isPass = false;
+                    break;
+                }
+            }
+
+            avg = sum / 5;
+
+            Console.WriteLine("Average Marks: " + avg);
+            if (avg > 50 && isPass)
+            {
+                Console.WriteLine("You're Pass");
             }
             else
             {
-                Console.WriteLine("Passed");
+                Console.WriteLine("Failed");
             }
         }
     }
